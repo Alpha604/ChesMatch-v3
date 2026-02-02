@@ -1,10 +1,10 @@
 
-const CACHE_NAME = 'chessmatch-v3';
+const CACHE_NAME = 'chessmatch-v4';
 
 // Only cache essential files explicitly to avoid errors
 const ASSETS_TO_CACHE = [
   'index.html',
-  'manifest.json?v=3'
+  'manifest.json?v=4'
 ];
 
 self.addEventListener('install', (event) => {
