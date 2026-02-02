@@ -1,9 +1,10 @@
 
-const CACHE_NAME = 'chessmatch-v6';
+const CACHE_NAME = 'chessmatch-v7';
 
+// Only cache essential local files. External images will be cached by browser disk cache automatically.
 const ASSETS_TO_CACHE = [
   'index.html',
-  'manifest.json?v=6'
+  'manifest.json?v=7'
 ];
 
 self.addEventListener('install', (event) => {
@@ -16,6 +17,7 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+  // Ignore non-http requests
   if (!event.request.url.startsWith('http')) return;
 
   event.respondWith(
@@ -23,14 +25,20 @@ self.addEventListener('fetch', (event) => {
       if (cachedResponse) return cachedResponse;
 
       return fetch(event.request).then((response) => {
+        // Cache valid responses
         if (!response || response.status !== 200 || response.type !== 'basic' && response.type !== 'cors' && response.type !== 'opaque') {
           return response;
         }
+        
+        // Clone and cache
         const responseToCache = response.clone();
         caches.open(CACHE_NAME).then((cache) => {
             try { cache.put(event.request, responseToCache); } catch (err) {}
         });
+        
         return response;
+      }).catch(() => {
+        // Fallback or nothing
       });
     })
   );

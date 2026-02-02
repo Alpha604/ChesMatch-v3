@@ -3,7 +3,7 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAO0lEQVR42u3BAQ0AAADCoPdPbQ43oAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIB204AAFiYhZkAAAAAElFTkSuQmCC" />
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/3002/3002696.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#2563eb" />
     <meta name="description" content="Gestionnaire de sessions d'échecs et statistiques" />
@@ -14,9 +14,9 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
-    <!-- Forced update to v6 -->
-    <link rel="manifest" href="./manifest.json?v=6" />
-    <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAO0lEQVR42u3BAQ0AAADCoPdPbQ43oAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIB204AAFiYhZkAAAAAElFTkSuQmCC" />
+    <!-- Forced update to v7 -->
+    <link rel="manifest" href="./manifest.json?v=7" />
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3002/3002696.png" />
     
     <title>ChessMatch Manager</title>
     
@@ -99,7 +99,6 @@
           navigator.serviceWorker.register('./sw.js')
             .then(registration => {
               console.log('ServiceWorker registered with scope:', registration.scope);
-              // Force update check
               if (registration.active) {
                  registration.update();
               }
