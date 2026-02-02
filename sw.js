@@ -1,14 +1,14 @@
 
-const CACHE_NAME = 'chessmatch-v4';
+const CACHE_NAME = 'chessmatch-v5';
 
 // Only cache essential files explicitly to avoid errors
 const ASSETS_TO_CACHE = [
   'index.html',
-  'manifest.json?v=4'
+  'manifest.json?v=5'
 ];
 
 self.addEventListener('install', (event) => {
-  self.skipWaiting();
+  self.skipWaiting(); // Force new SW to take over immediately
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       // Use ./ for relative paths if supported, otherwise fallback might be needed but usually for PWA ./index.html is safe
@@ -61,7 +61,8 @@ self.addEventListener('activate', (event) => {
           }
         })
       );
+    }).then(() => {
+        return self.clients.claim(); // Take control of all clients immediately
     })
   );
-  self.clients.claim();
 });

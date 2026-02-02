@@ -14,13 +14,14 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
-    <!-- Changed href to relative path ./manifest.json?v=4 to FORCE cache refresh and fix corrupted base64 -->
-    <link rel="manifest" href="./manifest.json?v=4" />
+    <!-- Updated to v=5 to absolutely force cache busting -->
+    <link rel="manifest" href="./manifest.json?v=5" />
     <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAMAAABlApw1AAAApVBMVEX///8lJSUAAAAmJiYKCgoODg4bGxszMzNMTExUVFRcXFxqampzc3N8fHyIiIiSkpKYmJigoKCtra21tbXAwMDDw8PMzMzW1tbd3d3i4uLs7Oz09PT8/Pz+/v7///////////////////////////////////////////////////////////////////////////////////////////////////////9/d70WAAAANHRSTlMAAgQGCAoMEO7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7usX2q3QAAA5NJREFUeNrt211LE2AYxvGz09nZfOisbdN8tCw/kF8gQqFeFF2UXXRREL3/R+uF82J7s45Z/6/reXF9uXhgDwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4H9tD/qD4XA4HI/H/X6/PxgM+v1u/7c9GAz6/fF4PBwO+4P2oD8YDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er1esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9seDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er3esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9seDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er3esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9seDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er3esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9seDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er3esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9seDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er3esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9seDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er3esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9seDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er3esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9seDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er3esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9seDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er3esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9seDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er3esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9seDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er3esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9seDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er3esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9sBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwP/0C+k1M+1j4wQeAAAAAElFTkSuQmCC" />
     
     <title>ChessMatch Manager</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
+      // Silence warning if possible by basic config
       tailwind.config = {
         theme: {
           extend: {
@@ -83,10 +84,12 @@
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          // Changed to relative path ./sw.js to fix 404 on subdirectories
+          // Use ./sw.js to be safe
           navigator.serviceWorker.register('./sw.js')
             .then(registration => {
               console.log('ServiceWorker registered with scope:', registration.scope);
+              // Force update check
+              registration.update();
             })
             .catch(err => {
               console.log('ServiceWorker registration failed: ', err);
