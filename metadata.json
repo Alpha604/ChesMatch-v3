@@ -1,0 +1,5 @@
+{
+  "name": "ChessMatch Manager",
+  "description": "A comprehensive chess session manager with player tracking, statistics, and game analysis features.",
+  "requestFramePermissions": []
+}
