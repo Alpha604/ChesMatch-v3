@@ -1,23 +1,29 @@
 
 const CACHE_NAME = 'chessmatch-v1';
 
-// Only cache local files during install to avoid CORS errors with CDNs
+// Only cache essential files explicitly to avoid errors
 const ASSETS_TO_CACHE = [
-  './',
-  './index.html',
-  './manifest.json'
+  'index.html',
+  'manifest.json'
 ];
 
 self.addEventListener('install', (event) => {
-  self.skipWaiting(); // Force activation immediately
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS_TO_CACHE);
+      // Use ./ for relative paths if supported, otherwise fallback might be needed but usually for PWA ./index.html is safe
+      // We removed './' root cache because it can fail on some static hosts depending on config
+      return cache.addAll(ASSETS_TO_CACHE.map(url => new Request(url, {cache: 'reload'})));
     })
   );
 });
 
 self.addEventListener('fetch', (event) => {
+  // Ignore unsupported schemes (like chrome-extension://)
+  if (!event.request.url.startsWith('http')) {
+      return;
+  }
+
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
       if (cachedResponse) {
@@ -25,26 +31,22 @@ self.addEventListener('fetch', (event) => {
       }
 
       return fetch(event.request).then((response) => {
-        // Check if we received a valid response
         if (!response || response.status !== 200 || response.type !== 'basic' && response.type !== 'cors' && response.type !== 'opaque') {
           return response;
         }
 
-        // Cache the fetched resource (runtime caching)
-        // This handles Tailwind and FontAwesome when they are loaded by the page
         const responseToCache = response.clone();
         caches.open(CACHE_NAME).then((cache) => {
-            // We use put here which is more permissive than addAll
             try {
                cache.put(event.request, responseToCache);
             } catch (err) {
-               // Ignore errors (e.g. chrome-extension:// schemes)
+               // Ignore errors
             }
         });
 
         return response;
       }).catch(() => {
-        // Optional: Return a fallback offline page if needed
+         // Offline fallback could go here
       });
     })
   );
@@ -62,5 +64,5 @@ self.addEventListener('activate', (event) => {
       );
     })
   );
-  self.clients.claim(); // Take control of all clients immediately
+  self.clients.claim();
 });
