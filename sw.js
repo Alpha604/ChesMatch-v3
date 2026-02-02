@@ -1,16 +1,15 @@
 
 const CACHE_NAME = 'chessmatch-v1';
-// Changed paths to relative (./) to support subdirectories (like GitHub Pages)
+
+// Only cache local files during install to avoid CORS errors with CDNs
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
-  './manifest.json',
-  'https://cdn.tailwindcss.com',
-  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
-  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/svgs/solid/chess-knight.svg'
+  './manifest.json'
 ];
 
 self.addEventListener('install', (event) => {
+  self.skipWaiting(); // Force activation immediately
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll(ASSETS_TO_CACHE);
@@ -19,29 +18,33 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  // Stratégie : Cache-First pour les assets statiques, Network-First pour le reste
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
-      // Si trouvé dans le cache, on le retourne
       if (cachedResponse) {
         return cachedResponse;
       }
-      
-      // Sinon on va le chercher sur le réseau
-      return fetch(event.request).then((networkResponse) => {
-        // On vérifie si la réponse est valide avant de la mettre en cache
-        if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
-          return networkResponse;
+
+      return fetch(event.request).then((response) => {
+        // Check if we received a valid response
+        if (!response || response.status !== 200 || response.type !== 'basic' && response.type !== 'cors' && response.type !== 'opaque') {
+          return response;
         }
 
-        // On clone la réponse car elle ne peut être consommée qu'une fois
-        const responseToCache = networkResponse.clone();
-
+        // Cache the fetched resource (runtime caching)
+        // This handles Tailwind and FontAwesome when they are loaded by the page
+        const responseToCache = response.clone();
         caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, responseToCache);
+            // We use put here which is more permissive than addAll
+            try {
+               cache.put(event.request, responseToCache);
+            } catch (err) {
+               // Ignore errors (e.g. chrome-extension:// schemes)
+            }
         });
 
-        return networkResponse;
+        return response;
+      }).catch(() => {
+        // Optional: Return a fallback offline page if needed
       });
     })
   );
@@ -59,4 +62,5 @@ self.addEventListener('activate', (event) => {
       );
     })
   );
+  self.clients.claim(); // Take control of all clients immediately
 });
