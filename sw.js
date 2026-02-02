@@ -1,9 +1,10 @@
 
 const CACHE_NAME = 'chessmatch-v1';
+// Changed paths to relative (./) to support subdirectories (like GitHub Pages)
 const ASSETS_TO_CACHE = [
-  '/',
-  '/index.html',
-  '/manifest.json',
+  './',
+  './index.html',
+  './manifest.json',
   'https://cdn.tailwindcss.com',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/svgs/solid/chess-knight.svg'

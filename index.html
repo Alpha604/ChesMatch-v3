@@ -7,13 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#2563eb" />
     <meta name="description" content="Gestionnaire de sessions d'échecs et statistiques" />
+    
+    <!-- Standard meta tag for mobile web apps -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <!-- Legacy Apple meta tag -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Changed href to relative path ./manifest.json to fix 404 on subdirectories/GitHub Pages -->
+    <link rel="manifest" href="./manifest.json" />
     <link rel="apple-touch-icon" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/svgs/solid/chess-knight.svg" />
+    
     <title>ChessMatch Manager</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" crossorigin="anonymous">
     <script>
       tailwind.config = {
         theme: {
@@ -77,9 +84,10 @@
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js')
+          // Changed to relative path ./sw.js to fix 404 on subdirectories
+          navigator.serviceWorker.register('./sw.js')
             .then(registration => {
-              console.log('ServiceWorker registered');
+              console.log('ServiceWorker registered with scope:', registration.scope);
             })
             .catch(err => {
               console.log('ServiceWorker registration failed: ', err);
