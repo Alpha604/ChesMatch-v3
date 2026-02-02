@@ -3,7 +3,7 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAMAAABlApw1AAAApVBMVEX///8lJSUAAAAmJiYKCgoODg4bGxszMzNMTExUVFRcXFxqampzc3N8fHyIiIiSkpKYmJigoKCtra21tbXAwMDDw8PMzMzW1tbd3d3i4uLs7Oz09PT8/Pz+/v7///////////////////////////////////////////////////////////////////////////////////////////////////////9/d70WAAAANHRSTlMAAgQGCAoMEO7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7usX2q3QAAA5NJREFUeNrt211LE2AYxvGz09nZfOisbdN8tCw/kF8gQqFeFF2UXXRREL3/R+uF82J7s45Z/6/reXF9uXhgDwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4H9tD/qD4XA4HI/H/X6/PxgM+v1u/7c9GAz6/fF4PBwO+4P2oD8YDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er1esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9seDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er3esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9seDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er3esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9seDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er3esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9seDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er3esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9seDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er3esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9seDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er3esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9seDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er3esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9seDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er3esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9seDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er3esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9seDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er3esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9seDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er3esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9seDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er3esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9sBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwP/0C+k1M+1j4wQeAAAAAElFTkSuQmCC" />
+    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAO0lEQVR42u3BAQ0AAADCoPdPbQ43oAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIB204AAFiYhZkAAAAAElFTkSuQmCC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#2563eb" />
     <meta name="description" content="Gestionnaire de sessions d'échecs et statistiques" />
@@ -14,14 +14,26 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
-    <!-- Updated to v=5 to absolutely force cache busting -->
-    <link rel="manifest" href="./manifest.json?v=5" />
-    <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAMAAABlApw1AAAApVBMVEX///8lJSUAAAAmJiYKCgoODg4bGxszMzNMTExUVFRcXFxqampzc3N8fHyIiIiSkpKYmJigoKCtra21tbXAwMDDw8PMzMzW1tbd3d3i4uLs7Oz09PT8/Pz+/v7///////////////////////////////////////////////////////////////////////////////////////////////////////9/d70WAAAANHRSTlMAAgQGCAoMEO7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7usX2q3QAAA5NJREFUeNrt211LE2AYxvGz09nZfOisbdN8tCw/kF8gQqFeFF2UXXRREL3/R+uF82J7s45Z/6/reXF9uXhgDwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4H9tD/qD4XA4HI/H/X6/PxgM+v1u/7c9GAz6/fF4PBwO+4P2oD8YDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er1esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9seDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er3esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9seDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er3esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9seDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er3esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9seDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er3esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9seDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er3esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9seDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er3esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9seDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er3esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9seDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er3esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9seDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er3esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9seDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er3esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9seDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er3esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9seDoew1+v1er1ut9fr9Xq93rD/2x4Oh7DX6/V6vW631+v1er3esP/bHg6HsNfr9Xq9brfX6/V6vd6w/9sBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwP/0C+k1M+1j4wQeAAAAAElFTkSuQmCC" />
+    <!-- Forced update to v6 -->
+    <link rel="manifest" href="./manifest.json?v=6" />
+    <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAO0lEQVR42u3BAQ0AAADCoPdPbQ43oAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIB204AAFiYhZkAAAAAElFTkSuQmCC" />
     
     <title>ChessMatch Manager</title>
+    
+    <!-- Script to suppress the specific Tailwind CDN warning -->
+    <script>
+      (function() {
+        const originalWarn = console.warn;
+        console.warn = function(...args) {
+          if (args[0] && typeof args[0] === 'string' && args[0].includes('cdn.tailwindcss.com')) {
+            return;
+          }
+          originalWarn.apply(console, args);
+        };
+      })();
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-      // Silence warning if possible by basic config
       tailwind.config = {
         theme: {
           extend: {
@@ -84,12 +96,13 @@
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          // Use ./sw.js to be safe
           navigator.serviceWorker.register('./sw.js')
             .then(registration => {
               console.log('ServiceWorker registered with scope:', registration.scope);
               // Force update check
-              registration.update();
+              if (registration.active) {
+                 registration.update();
+              }
             })
             .catch(err => {
               console.log('ServiceWorker registration failed: ', err);
