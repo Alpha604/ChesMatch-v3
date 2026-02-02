@@ -1,10 +1,10 @@
 
-const CACHE_NAME = 'chessmatch-v1';
+const CACHE_NAME = 'chessmatch-v2';
 
 // Only cache essential files explicitly to avoid errors
 const ASSETS_TO_CACHE = [
   'index.html',
-  'manifest.json'
+  'manifest.json?v=2'
 ];
 
 self.addEventListener('install', (event) => {
@@ -12,7 +12,6 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       // Use ./ for relative paths if supported, otherwise fallback might be needed but usually for PWA ./index.html is safe
-      // We removed './' root cache because it can fail on some static hosts depending on config
       return cache.addAll(ASSETS_TO_CACHE.map(url => new Request(url, {cache: 'reload'})));
     })
   );

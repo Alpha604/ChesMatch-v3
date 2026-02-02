@@ -15,6 +15,13 @@ interface LayoutProps {
   toggleSound: () => void;
 }
 
+// Simple Chess Knight Icon SVG to replace FontAwesome
+const ChessKnightLogo = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" className={className}>
+    <path d="M127.8 288c12.6 1.8 24.3-3.2 27.6-13.7 2.1-6.6-1.5-16.1-9.9-20.9-10.4-5.9-19-4.8-22.3 5.9-2.9 9.3 0 19.9 4.6 28.7zm283.4-38.6c-4.4-23.8-31.5-29.2-35.8-5.3-2 11.2-12.7 18.2-22.6 15.1-9.8-3.1-15-13.8-11.2-23.7 13.9-35.9 66.7-38.3 84.8 6.5 13.4 33.1-23.4 46.1-3.6 77.2 4 6.3 11 10.3 18.6 10.3 12.3 0 22.3-10 22.3-22.3v-58.4c0-34.9-31.6-61.1-65.7-55.8-19.1 3-36.6 14.8-46.3 31.7l-4.7 8.1c-14.7 25.5-2.2 58.1 24.1 63.1 3.5.7 7.1-1.3 7.8-4.8 1.4-6.8-2.6-13.5-9-15.3-11.4-3.2-16.7-17.6-10.2-27.4l4.7-8.1c4.2-7.3 11.9-12.5 20.3-13.8 14.7-2.3 28.3 9 28.3 24.2v25.2c0 2.2-1.8 4-4 4-2.2 0-4-1.8-4-4v-5.2c0-8.8-7.2-16-16-16-8.8 0-16 7.2-16 16v18.1c0 29.4-20.9 54.3-49.8 59.4l-11.2 2c-35.2 6.2-57.6 44.5-43.1 77.3l2.8 6.4c10.4 23.5 33.5 38.6 59.2 38.6h125.7c22 0 41.5-14.5 48.1-35.7l12.3-39.6c4-12.9-1.3-27.1-12.6-33.8zM256 128c17.7 0 32-14.3 32-32s-14.3-32-32-32-32 14.3-32 32 14.3 32 32 32zm-64 224c0-17.7-14.3-32-32-32s-32 14.3-32 32 14.3 32 32 32 32-14.3 32-32z"/>
+  </svg>
+);
+
 export const Layout: React.FC<LayoutProps> = ({ 
   user, 
   currentView, 
@@ -59,7 +66,7 @@ export const Layout: React.FC<LayoutProps> = ({
       <header className="bg-white sticky top-0 z-50 shadow-sm border-b border-gray-200">
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
           <div className="flex items-center gap-3 text-2xl font-bold text-gray-800 select-none cursor-pointer" onClick={() => onChangeView('dashboard')}>
-            <i className="fa-solid fa-chess-knight text-primary"></i>
+            <ChessKnightLogo className="w-8 h-8 text-primary" />
             <span>ChessMatch</span>
           </div>
 
