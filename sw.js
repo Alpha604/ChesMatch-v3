@@ -1,44 +1,52 @@
 
-const CACHE_NAME = 'chessmatch-v7';
+const CACHE_NAME = 'chessmatch-v1';
 
-// Only cache essential local files. External images will be cached by browser disk cache automatically.
+// Only cache essential files explicitly to avoid errors
 const ASSETS_TO_CACHE = [
   'index.html',
-  'manifest.json?v=7'
+  'manifest.json'
 ];
 
 self.addEventListener('install', (event) => {
   self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
+      // Use ./ for relative paths if supported, otherwise fallback might be needed but usually for PWA ./index.html is safe
+      // We removed './' root cache because it can fail on some static hosts depending on config
       return cache.addAll(ASSETS_TO_CACHE.map(url => new Request(url, {cache: 'reload'})));
     })
   );
 });
 
 self.addEventListener('fetch', (event) => {
-  // Ignore non-http requests
-  if (!event.request.url.startsWith('http')) return;
+  // Ignore unsupported schemes (like chrome-extension://)
+  if (!event.request.url.startsWith('http')) {
+      return;
+  }
 
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
-      if (cachedResponse) return cachedResponse;
+      if (cachedResponse) {
+        return cachedResponse;
+      }
 
       return fetch(event.request).then((response) => {
-        // Cache valid responses
         if (!response || response.status !== 200 || response.type !== 'basic' && response.type !== 'cors' && response.type !== 'opaque') {
           return response;
         }
-        
-        // Clone and cache
+
         const responseToCache = response.clone();
         caches.open(CACHE_NAME).then((cache) => {
-            try { cache.put(event.request, responseToCache); } catch (err) {}
+            try {
+               cache.put(event.request, responseToCache);
+            } catch (err) {
+               // Ignore errors
+            }
         });
-        
+
         return response;
       }).catch(() => {
-        // Fallback or nothing
+         // Offline fallback could go here
       });
     })
   );
@@ -54,6 +62,7 @@ self.addEventListener('activate', (event) => {
           }
         })
       );
-    }).then(() => self.clients.claim())
+    })
   );
+  self.clients.claim();
 });
